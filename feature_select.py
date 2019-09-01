@@ -14,7 +14,7 @@ import pandas, numpy, string
 # In[ ]:
 
 
-data = open('./whodunnit/train_tweets.txt').read()
+data = open('./whodunnit/train_tweets.txt','rb').read()
 author, tweet = [], []
 for i, line in enumerate(data.split("\n")):
     content = line.split('\t')
