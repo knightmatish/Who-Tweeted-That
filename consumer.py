@@ -18,7 +18,7 @@ from sklearn.feature_selection import chi2
 import numpy as np
 from sklearn.externals import joblib
 
-df = pd.read_csv('enhanced_train_tweets.csv',names = ["userID","tweets"])
+df = pd.read_csv('enhanced_train_tweets_2950.csv',names = ["userID","tweets"])
 df.head()
 
 
@@ -83,6 +83,7 @@ tfidf = TfidfVectorizer(sublinear_tf=True, min_df=5, norm='l2', encoding='latin-
 features = tfidf.fit_transform(df.tweets).toarray()
 labels = df.category_id
 features.shape
+print (features.shape)
 
 
 # In[ ]:
