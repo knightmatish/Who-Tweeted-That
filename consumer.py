@@ -16,6 +16,7 @@ from io import StringIO
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import chi2
 import numpy as np
+from sklearn.externals import joblib
 
 df = pd.read_csv('enhanced_train_tweets.csv',names = ["userID","tweets"])
 df.head()
@@ -86,15 +87,16 @@ features.shape
 
 # In[ ]:
 
-
+check = 0
 N = 2
 for Product, category_id in sorted(category_to_id.items()):
+  print ("check",check,"catid",category_id)
   features_chi2 = chi2(features, labels == category_id)
   indices = np.argsort(features_chi2[0])
   feature_names = np.array(tfidf.get_feature_names())[indices]
   unigrams = [v for v in feature_names if len(v.split(' ')) == 1]
   bigrams = [v for v in feature_names if len(v.split(' ')) == 2]
-
+  check += 1
 
 # In[ ]:
 
@@ -107,7 +109,7 @@ X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 
 # clf = MultinomialNB().fit(X_train_tfidf, y_train)
 clf = LinearSVC().fit(X_train_tfidf, y_train)
-
+joblib.dump(model, 'LinearSVC_chi2.pkl')
 
 # In[ ]:
 
