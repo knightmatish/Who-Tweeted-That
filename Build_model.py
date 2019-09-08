@@ -79,7 +79,7 @@ X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 
 # MLP Classifier
 
-clf = MLPClassifier(activation='relu', solver='sgd', hidden_layer_sizes=(10,15), random_state=1)
+clf = MLPClassifier(activation='relu', solver='sgd', hidden_layer_sizes=(3,5), random_state=1)
 clf.fit(x_train_tfidf,y_train)
 def clean_tweet_text(tweet):
     text = re.sub(r'@\w+\s?', '', tweet)
